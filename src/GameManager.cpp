@@ -1,23 +1,36 @@
 #include "GameManager.h"
-#include <iostream>
 
-MainMenu* GameManager::getMainMenu()
+std::unique_ptr<MainMenu> GameManager::getMainMenu()
 {
-    return this->mainMenu;
+    std::unique_ptr<MainMenu> menu(new MainMenu);
+
+    return menu;
 }
 
 int GameManager::run()
 {
-    MainMenu* mainMenu = this->getMainMenu();
+    while (command != GameManagerCommands::QUIT_CMD)
+    {
+        auto mainMenu = getMainMenu();
 
-    MenuOption menuOption = mainMenu->display();
+        MenuOption menuOption = mainMenu->display();
 
-    if (menuOption == MenuOption::INCORRECT) {
-        std::cout << "Your input is invalid. Exiting..." << std::endl;
-    }
+        switch (menuOption)
+        {
+            case MenuOption::NEW_GAME:
+                //TODO implement game start
+                break;
+            case MenuOption::INCORRECT:
+                std::cout << "Your input is invalid. Exiting..." << std::endl;
 
-    if (menuOption == MenuOption::NEW_GAME) {
-        //TODO do something
+                if (mainMenu->tryAgain()) continue;
+
+                command = GameManagerCommands::QUIT_CMD;
+                break;
+            case MenuOption::QUIT:
+                command = GameManagerCommands::QUIT_CMD;
+                break;
+        }
     }
 
     return 0;

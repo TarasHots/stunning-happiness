@@ -13,6 +13,7 @@ class MainMenu
 {
 public:
     MenuOption display();
+    bool tryAgain();
 
 private:
     bool isOptionValid(const char &ch);

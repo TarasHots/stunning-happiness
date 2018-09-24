@@ -24,6 +24,21 @@ MenuOption MainMenu::display() {
 }
 
 /**
+ * Introduces more verbosity
+ *
+ * @return
+ */
+bool MainMenu::tryAgain() {
+    std::cout << "Wanna try again?(Y/N)" << std::endl;
+
+    char option = ' ';
+
+    std::cin >> option;
+
+    return option == 'Y';
+}
+
+/**
  * Validates input character
  *
  * @param ch
