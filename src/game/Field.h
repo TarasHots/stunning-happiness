@@ -26,11 +26,11 @@ public:
     bool isPlacedAllShips();
     bool isAllShipsDestroyed();
 
-    bool placeShip(int size);
+    bool placeShip(const int size, const int x, const int y);
 private:
-    unsigned int fieldSize = 100;
+    const unsigned int fieldSize = 100;
     Part defaultPart = Part::NONE;
     std::vector<Part> field;
-    int shipSizeOneCount = 4, shipSizeTwoCount = 3, shipSizeThreeCount = 2, shipSizeFourCount = 1;
+    const int shipSizeOneCount = 4, shipSizeTwoCount = 3, shipSizeThreeCount = 2, shipSizeFourCount = 1;
     bool placedAllShips = false, allShipsDestroyed = false;
 };

@@ -1,3 +1,6 @@
+#include <cctype>
+#include <iostream>
+
 #ifndef BATTLESHIPS_HELPER_H
 #define BATTLESHIPS_HELPER_H
 
@@ -7,4 +10,5 @@ class Helper
 {
 public:
     static bool is_digit(char ch);
+    static void clearScreen();
 };

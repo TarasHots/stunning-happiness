@@ -7,9 +7,17 @@ std::unique_ptr<MainMenu> GameManager::getMainMenu()
     return menu;
 }
 
+GameMode GameManager::getCurrentMode() const {
+    return currentMode;
+}
+
+void GameManager::setCurrentMode(GameMode mode) {
+    currentMode = mode;
+}
+
 int GameManager::run()
 {
-    while (command != GameManagerCommands::QUIT_CMD)
+    while (command != GameManagerCommand::QUIT_CMD)
     {
         auto mainMenu = getMainMenu();
 
@@ -18,20 +26,40 @@ int GameManager::run()
         switch (menuOption)
         {
             case MenuOption::NEW_GAME:
-                //TODO implement game start
+                startGame();
                 break;
             case MenuOption::INCORRECT:
                 std::cout << "Your input is invalid. Exiting..." << std::endl;
 
                 if (mainMenu->tryAgain()) continue;
 
-                command = GameManagerCommands::QUIT_CMD;
+                command = GameManagerCommand::QUIT_CMD;
                 break;
             case MenuOption::QUIT:
-                command = GameManagerCommands::QUIT_CMD;
+                command = GameManagerCommand::QUIT_CMD;
                 break;
         }
     }
 
     return 0;
 }
+
+int GameManager::startGame()
+{
+    setCurrentMode(GameMode::PLACING_SHIPS);
+
+    //TODO
+    std::cout << "Enter your name, please..." << std::endl;
+
+    std::string playerName;
+
+    std::cin >> playerName;
+
+    std::cout << "Welcome, " << playerName << std::endl;
+
+    Helper::clearScreen();
+
+    return 0;
+}
+
+
