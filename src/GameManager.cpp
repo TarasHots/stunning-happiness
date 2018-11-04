@@ -17,7 +17,7 @@ void GameManager::setCurrentMode(GameMode mode) {
 
 int GameManager::run()
 {
-    while (command != GameManagerCommand::QUIT_CMD)
+    while (*command != GameManagerCommand::QUIT_CMD)
     {
         auto mainMenu = getMainMenu();
 
@@ -33,10 +33,10 @@ int GameManager::run()
 
                 if (mainMenu->tryAgain()) continue;
 
-                command = GameManagerCommand::QUIT_CMD;
+                *command = GameManagerCommand::QUIT_CMD;
                 break;
             case MenuOption::QUIT:
-                command = GameManagerCommand::QUIT_CMD;
+                *command = GameManagerCommand::QUIT_CMD;
                 break;
         }
     }
@@ -55,9 +55,11 @@ int GameManager::startGame()
 
     std::cin >> playerName;
 
+    Helper::clearScreen();
+
     std::cout << "Welcome, " << playerName << std::endl;
 
-    Helper::clearScreen();
+    //TODO draw
 
     return 0;
 }

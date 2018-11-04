@@ -37,7 +37,7 @@ public:
 
 private:
     GameMode currentMode = GameMode::NONE;
-    char command = ' ';
+    char* command = new char();
 
     std::unique_ptr<MainMenu> getMainMenu();
 };
