@@ -12,12 +12,11 @@ MenuOption MainMenu::display() {
     std::cout << "1.New game" << std::endl;
     std::cout << "2.Quit" << std::endl;
 
-    char option = ' ';
+    //no need to store it, so can be removed on out of scope
+    std::unique_ptr<char> option(new char());
 
-    std::cin >> option;
-
-    if (this->isOptionValid(option)) {
-        return this->convertToMenuOption(option);
+    if (this->isOptionValid(*option.get())) {
+        return this->convertToMenuOption(*option.get());
     } else {
         return MenuOption::INCORRECT;
     }
@@ -44,7 +43,7 @@ bool MainMenu::tryAgain() {
  * @param ch
  * @return
  */
-bool MainMenu::isOptionValid(const char &ch) {
+bool MainMenu::isOptionValid(const char& ch) {
     if (Helper::is_digit(ch)) {
         int selected_option = ch - '0';// casting char to int like this ¯\_(ツ)_/¯
 
@@ -62,7 +61,7 @@ bool MainMenu::isOptionValid(const char &ch) {
  * @param ch
  * @return
  */
-MenuOption MainMenu::convertToMenuOption(const char &ch)
+MenuOption MainMenu::convertToMenuOption(const char& ch)
 {
     switch (ch) {
         case '1':

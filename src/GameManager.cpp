@@ -1,18 +1,18 @@
 #include "GameManager.h"
 
-std::unique_ptr<MainMenu> GameManager::getMainMenu()
+MainMenu* GameManager::getMainMenu() const
 {
-    std::unique_ptr<MainMenu> menu(new MainMenu);
-
-    return menu;
+    return mainMenu;
 }
 
 GameMode GameManager::getCurrentMode() const {
     return currentMode;
 }
 
-void GameManager::setCurrentMode(GameMode mode) {
+GameMode GameManager::setCurrentMode(GameMode mode) {
     currentMode = mode;
+
+    return currentMode;
 }
 
 int GameManager::run()

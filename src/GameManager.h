@@ -33,11 +33,20 @@ public:
 
 
     GameMode getCurrentMode() const;
-    void setCurrentMode(GameMode mode);
+    MainMenu* getMainMenu() const;
+
+    GameMode setCurrentMode(GameMode mode);
+
+    GameManager() : currentMode(GameMode::NONE), command(new char()), mainMenu(new MainMenu()) {}
+
+    ~GameManager()
+    {
+      delete command;
+      delete mainMenu;
+    }
 
 private:
-    GameMode currentMode = GameMode::NONE;
-    char* command = new char();
-
-    std::unique_ptr<MainMenu> getMainMenu();
+    GameMode currentMode;
+    char* command;
+    MainMenu* mainMenu;
 };
