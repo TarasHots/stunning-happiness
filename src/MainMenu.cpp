@@ -12,61 +12,31 @@ MenuOption MainMenu::display() {
     std::cout << "1.New game" << std::endl;
     std::cout << "2.Quit" << std::endl;
 
-    //no need to store it, so can be removed on out of scope
-    std::unique_ptr<char> option(new char());
+    int option = -1;
 
-    if (this->isOptionValid(*option.get())) {
-        return this->convertToMenuOption(*option.get());
+    std::cin >> option;
+
+    if (this->isOptionValid(option)) {
+        return this->convertToMenuOption(option);
     } else {
         return MenuOption::INCORRECT;
     }
 }
 
-/**
- * Introduces more verbosity
- *
- * @return
- */
-bool MainMenu::tryAgain() {
-    std::cout << "Wanna try again?(Y/N)" << std::endl;
+bool MainMenu::isOptionValid(const int option) {
+  if (option == MenuOption::NEW_GAME || option == MenuOption::QUIT) {
+      return true;
+  }
 
-    char option = ' ';
-
-    std::cin >> option;
-
-    return option == 'Y';
+  return false;
 }
 
-/**
- * Validates input character
- *
- * @param ch
- * @return
- */
-bool MainMenu::isOptionValid(const char& ch) {
-    if (Helper::is_digit(ch)) {
-        int selected_option = ch - '0';// casting char to int like this ¯\_(ツ)_/¯
-
-        if (selected_option == MenuOption::NEW_GAME || selected_option == MenuOption::QUIT) {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-/**
- * Converts character to fancy enum value
- *
- * @param ch
- * @return
- */
-MenuOption MainMenu::convertToMenuOption(const char& ch)
+MenuOption MainMenu::convertToMenuOption(const int option)
 {
-    switch (ch) {
-        case '1':
+    switch (option) {
+        case 1:
             return MenuOption::NEW_GAME;
-        case '2':
+        case 2:
             return MenuOption::QUIT;
         default:
             return MenuOption::INCORRECT;

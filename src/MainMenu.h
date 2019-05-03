@@ -3,8 +3,6 @@
 
 #endif //BATTLESHIPS_MAINMENU_H
 
-#include <memory>
-
 enum MenuOption {
     INCORRECT = -1,
     NEW_GAME = 1,
@@ -15,9 +13,8 @@ class MainMenu
 {
 public:
     MenuOption display();
-    bool tryAgain();
 
 private:
-    bool isOptionValid(const char& ch);
-    MenuOption convertToMenuOption(const char& ch);
+    bool isOptionValid(const int option);
+    MenuOption convertToMenuOption(const int option);
 };

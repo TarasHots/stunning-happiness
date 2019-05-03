@@ -29,9 +29,7 @@ int GameManager::run()
                 startGame();
                 break;
             case MenuOption::INCORRECT:
-                std::cout << "Your input is invalid. Exiting..." << std::endl;
-
-                if (mainMenu->tryAgain()) continue;
+                std::cout << "Your input is invalid." << std::endl;
 
                 *command = GameManagerCommand::QUIT_CMD;
                 break;
@@ -40,6 +38,8 @@ int GameManager::run()
                 break;
         }
     }
+
+    std::cout << "Exiting..." << std::endl;
 
     return 0;
 }
